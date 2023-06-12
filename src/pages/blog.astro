@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import Showcase from "../components/Showcase.astro";
+
+const posts = await Astro.glob("../posts/*.md");
+---
+
+<Layout title="blog">
+    <Showcase heading="Astro Blog" text="A simple blog built with Astro" />
+    <section class="page-content">
+        <div class="container">
+                {posts.map(post => (
+                    <Card title={post.frontmatter.title} body={post.frontmatter.exerpt} >
+                    <a class="btn" href={`/${post.frontmatter.slug}`}>Click to read the post</a>
+                    </Card>
+                ))}
+        </div>
+    </section>
+
+</Layout>
